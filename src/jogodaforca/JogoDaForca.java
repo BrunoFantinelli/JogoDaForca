@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogodaforca;
 
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
-
-
 
 /**
  *
@@ -21,30 +12,23 @@ public class JogoDaForca {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Controle controle = new Controle();
+        
         boolean ganhou = false;
-        ArrayList<String> palavras = new ArrayList<>();
         Scanner entrada = new Scanner(System.in);
-        
         int vidas = 5;
-        
-        palavras.add("luana");
-        palavras.add("bruno");
-        palavras.add("amanda");
-        palavras.add("isadora");
-        palavras.add("leonardo");
-        
-        Random gerador = new Random();
-        int valor = gerador.nextInt(5);
+        char letra;
         
         StringBuilder resposta_usuario = new StringBuilder();
-        String resposta = palavras.get(valor);
+        String resposta = controle.sortearPalavra();
         
         for(int j = 0; j < resposta.length(); j++){
                resposta_usuario.append("_");
+               System.out.print("_ ");
         }
         
+        System.out.println("\n");
         
-        char letra;
         while(vidas > 0){
             letra = entrada.next().charAt(0);
             boolean achou = false;
@@ -57,8 +41,12 @@ public class JogoDaForca {
                 }
             }
             
-            System.out.println(resposta_usuario);
-                    
+            for(int x = 0; x < resposta.length(); x++){
+                System.out.print(resposta_usuario.charAt(x) + " ");
+            }
+            
+            System.out.println("\n");
+        
             if(!achou){
                 vidas--;
             }
@@ -69,12 +57,8 @@ public class JogoDaForca {
             }
         }
         
-        if(ganhou){
-            System.out.println("Ganhou. =)");
-        }else{
-            System.out.println("Perdeu. =(");
-        }
+        System.out.println(controle.getResultado(ganhou));
         
     }
-    
+
 }
